@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ZStack{
+            Image("HomeScreenBG")
             VStack{
                 HStack{Button("Settings") {
                     /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
@@ -23,9 +24,7 @@ struct ContentView: View {
                 }
             }
             VStack{
-              
                 HStack{
-                   
                     Button("Ranks") {
                         /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
                     }
@@ -44,6 +43,7 @@ struct ContentView: View {
                 }
                 .padding(.bottom, 450.0)
             }
+            .padding(2.0)
             VStack{
                 Button("Shop") {
                 /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
