@@ -53,7 +53,6 @@ struct ContentView: View {
                     .font(.largeTitle)
                     .opacity(0.0)
                     
-                    // ✅ WORKING NAVIGATION
                     NavigationLink(destination: CheckersView()) {
                         Text("Play")
                             .frame(width: 300, height: 130)
