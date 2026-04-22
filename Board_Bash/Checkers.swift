@@ -17,7 +17,7 @@ struct CheckersView: View {
     var body: some View {
         ZStack {
             
-            // 🖼 KEEP YOUR BACKGROUND
+            //BACKGROUND
             Image("CheckersScreenBG")
                 .resizable()
                 .ignoresSafeArea()
@@ -28,7 +28,7 @@ struct CheckersView: View {
                     .font(.title)
                     .foregroundColor(.white)
                 
-                // 🟫 GRID BOARD (REAL GAME BOARD)
+                //BOARD
                 LazyVGrid(
                     columns: Array(repeating: GridItem(.flexible()), count: 8),
                     spacing: 0
@@ -40,24 +40,23 @@ struct CheckersView: View {
                         
                         ZStack {
                             
-                            // 🎨 TILE COLOR
+                            //TILE COLOR
                             Rectangle()
                                 .fill((row + col) % 2 == 0 ? Color.white : Color.black)
                                 .frame(width:45, height: 45)
                             
-                            // 🔴⚫ PIECES (EMPTY STYLE)
+                            //PIECES
                             if let piece = pieceAt(row: row, col: col) {
                                 
-                                Circle()
-                                    .stroke(lineWidth: 3)
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(piece.isRed ? .red : .gray)
-                                
-                                // 👉 LATER replace with:
-                                // Image("RedHappyChecker")
+                                Image(piece.isRed ? "BlueHappyChecker" : "RedMadChecker")
+                                    .resizable()
+                                    .frame(width: 1, height:1)
+                                    .scaleEffect(70)
+                                    .offset(x:0, y:-5)
+                                 
                             }
                             
-                            //  SELECTED HIGHLIGHT
+                            //HIGHLIGHT
                             if selectedPiece?.row == row && selectedPiece?.col == col {
                                 Rectangle()
                                     .stroke(Color.pink, lineWidth: 3)
@@ -77,7 +76,9 @@ struct CheckersView: View {
         }
     }
     
-    // 🧩 PIECE MODEL
+       
+    
+    //PIECE MODEL
     struct Piece: Identifiable {
         let id = UUID()
         var row: Int
@@ -86,7 +87,7 @@ struct CheckersView: View {
         var isKing: Bool = false
     }
     
-    // 🎮 SETUP BOARD
+    //SETUP BOARD
     func setupBoard() {
         pieces.removeAll()
         
@@ -107,12 +108,12 @@ struct CheckersView: View {
         }
     }
     
-    // 🔍 FIND PIECE
+    // FIND PIECE
     func pieceAt(row: Int, col: Int) -> Piece? {
         pieces.first { $0.row == row && $0.col == col }
     }
     
-    // 👆 HANDLE TAP
+    //TAP
     func handleTap(row: Int, col: Int) {
         
         // Select piece
@@ -133,7 +134,7 @@ struct CheckersView: View {
         selectedPiece = nil
     }
     
-    // ✅ VALID MOVE
+    //VALID MOVE
     func isValidMove(from piece: Piece, toRow: Int, toCol: Int) -> Bool {
         
         if pieceAt(row: toRow, col: toCol) != nil { return false }
@@ -161,7 +162,7 @@ struct CheckersView: View {
         return false
     }
     
-    // 🚀 MOVE PIECE
+    //  MOVE PIECE
     func movePiece(_ piece: Piece, toRow: Int, toCol: Int) {
         
         guard let index = pieces.firstIndex(where: { $0.id == piece.id }) else { return }
